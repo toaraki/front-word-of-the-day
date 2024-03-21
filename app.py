@@ -1,7 +1,24 @@
 from flask import Flask, render_template, jsonify
 import requests
+from opentelemetry import trace
+from opentelemetry import metrics
+import logging
+
+
+# Acquire a tracer
+tracer = trace.get_tracer("diceroller.tracer")
+# Acquire a meter.
+meter = metrics.get_meter("diceroller.meter")
+
+# Now create a counter instrument to make measurements with
+roll_counter = meter.create_counter(
+  "front",
+   description="Front page of this suite"
+)
 
 app = Flask(__name__)
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 @app.route('/')
 def index():
