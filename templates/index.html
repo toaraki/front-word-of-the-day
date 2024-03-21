@@ -30,7 +30,7 @@
             // ボタンがクリックされたときのイベントハンドラを登録
             rollButton.addEventListener('click', function() {
                 // API からデータを取得
-                fetch('/')
+                fetch('http://word-of-the-day-git.openshift-tempo-operator.svc:8081/rolldice')
                     .then(response => {
                         if (!response.ok) {
                             throw new Error('Network response was not ok');
