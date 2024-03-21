@@ -3,30 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Frontend with API</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Backend Response</title>
 </head>
 <body>
-    <h1>Frontend with API</h1>
-    <div id="data-container">
-        {% for item in data %}
-            <p>{{ item }}</p>
-        {% endfor %}
-    </div>
+    <h1>Backend Response</h1>
+    <p>Player: <span id="player"></span></p>
+    <p>Result: <span id="result"></span></p>
+
     <script>
-        // ページロード時にデータを取得し表示する
         document.addEventListener('DOMContentLoaded', function() {
-            fetch('/api/data')
+            fetch('/rolldice?player=John')
                 .then(response => response.json())
                 .then(data => {
-                    const container = document.getElementById('data-container');
-                    container.innerHTML = '';
-                    data.forEach(item => {
-                        const p = document.createElement('p');
-                        p.textContent = item;
-                        container.appendChild(p);
-                    });
-                });
+                    document.getElementById('player').textContent = data.player;
+                    document.getElementById('result').textContent = data.result;
+                })
+                .catch(error => console.error('Error fetching data:', error));
         });
     </script>
 </body>
