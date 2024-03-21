@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frontend with API</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Frontend with API</h1>
+    <div id="data-container">
+        {% for item in data %}
+            <p>{{ item }}</p>
+        {% endfor %}
+    </div>
+    <script>
+        // ページロード時にデータを取得し表示する
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('/api/data')
+                .then(response => response.json())
+                .then(data => {
+                    const container = document.getElementById('data-container');
+                    container.innerHTML = '';
+                    data.forEach(item => {
+                        const p = document.createElement('p');
+                        p.textContent = item;
+                        container.appendChild(p);
+                    });
+                });
+        });
+    </script>
+</body>
+</html>
+
