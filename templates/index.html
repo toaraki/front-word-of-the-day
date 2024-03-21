@@ -22,7 +22,7 @@
         // ページが読み込まれたときに実行される処理
         document.addEventListener('DOMContentLoaded', function() {
             // API からデータを取得
-            fetch('/')
+            fetch('/rolldice')
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
