@@ -3,29 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Backend Response</title>
+    <title>Dice Roller</title>
 </head>
 <body>
-    <h1>Backend Response</h1>
-    <p>Player: <span id="player"></span></p>
-    <p>Result: <span id="result"></span></p>
+    <h1>Dice Roller</h1>
+    <div id="diceResult">
+        <p>Player: <span id="player"></span></p>
+        <p>Result: <span id="result"></span></p>
+    </div>
 
     <script>
+        // API から取得したデータを表示する関数
+        function displayData(data) {
+            document.getElementById('player').textContent = data.player;
+            document.getElementById('result').textContent = data.result;
+        }
+
+        // ページが読み込まれたときに実行される処理
         document.addEventListener('DOMContentLoaded', function() {
-            fetch('/rolldice')
-                .then(response =>{
-                  if (!response.ok){
-                    throw new Error('Network response was not ok');
-                  }
-                  return response.json();
+            // API からデータを取得
+            fetch('/')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
                 })
                 .then(data => {
-                    document.getElementById('player').textContent = data.player;
-                    document.getElementById('result').textContent = data.result;
-                    console.log('Data:', data);
+                    // 取得したデータを表示
+                    displayData(data);
                 })
                 .catch(error => {
-                  console.error('Error fetching data:', error);
+                    console.error('Error fetching data:', error);
                 });
         });
     </script>
