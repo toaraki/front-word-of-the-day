@@ -12,7 +12,8 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            fetch('/rolldice')
+            <!-- fetch('/rolldice') -->
+            fetch('')
                 .then(response => response.json())
                 .then(data => {
                     document.getElementById('player').textContent = data.player;

@@ -6,8 +6,7 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     # API を呼び出してデータを取得
-    api_url = 'http://word-of-the-day-git.openshift-tempo-operator.svc:8081'
-    # api_url = 'http://word-of-the-day-git.openshift-tempo-operator.svc:8081/rolldice'
+    api_url = 'http://word-of-the-day-git.openshift-tempo-operator.svc:8081/rolldice'
     response = requests.get(api_url)
 
     print("Backend Response:", response.text)
