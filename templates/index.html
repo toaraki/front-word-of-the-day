@@ -12,7 +12,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            fetch('/rolldice?player=John')
+            fetch('/rolldice')
                 .then(response => response.json())
                 .then(data => {
                     document.getElementById('player').textContent = data.player;
