@@ -8,45 +8,9 @@
 <body>
     <h1>Dice Roller</h1>
     <div id="diceResult">
-        <p>Player: <span id="player"></span></p>
-        <p>Result: <span id="result"></span></p>
+        <p>Player: <span id="player">{{ data.player }}</span></p>
+        <p>Result: <span id="result">{{ data.result }}</span></p>
     </div>
-    
-    <!-- ボタンを追加 -->
-    <button id="rollButton">Roll Dice</button>
-
-    <script>
-        // API から取得したデータを表示する関数
-        function displayData(data) {
-            document.getElementById('player').textContent = data.player;
-            document.getElementById('result').textContent = data.result;
-        }
-
-        // ページが読み込まれたときに実行される処理
-        document.addEventListener('DOMContentLoaded', function() {
-            // ボタン要素を取得
-            var rollButton = document.getElementById('rollButton');
-
-            // ボタンがクリックされたときのイベントハンドラを登録
-            rollButton.addEventListener('click', function() {
-                // API からデータを取得
-                fetch('http://word-of-the-day-git.openshift-tempo-operator.svc:8081/rolldice')
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok');
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        // 取得したデータを表示
-                        displayData(data);
-                    })
-                    .catch(error => {
-                        console.error('Error fetching data:', error);
-                    });
-            });
-        });
-    </script>
 </body>
 </html>
 
